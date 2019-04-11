@@ -43,3 +43,36 @@ Outra opção é passar o arquivo direto no código. Veja exemplo da appspring
 6. Criar o banco de dados no Google Cloud
 a) Criar o banco
 b) Liberar o acesso de IP público. Para isso, clique em Show configuration options e na parte de redes autorizadas Authorize Networks coloque o endereço 0.0.0.0/0
+
+7. Criar uma instancia de maquina virtual no Google Cloud
+
+gcloud compute instances create my-server-app-spring-mvc --image-family=ubuntu-1604-lts --image-project=ubuntu-os-cloud --zone=us-east1-b
+
+8. Gere um conjunto de arquivos de chave pública e privada para acessar o servidor. 
+
+9. Coloque a chave pública no servidor criado
+
+10. Acesse via ssh o servidor criado com sua chave privada
+
+11. Instale o Tomcat
+
+12. Libere as portas do Firewall
+
+Redes -> VCP Networks
+
+Gerar a chave privada via Openssl
+openssl genrsa -des3 -out private.pem 2048
+openssl rsa -in private-google-cloud.pem -outform PEM -pubout -out public-google-cloud.pem
+
+Via comando do GCloud na sua máquina com o Google Cloud SDK: gcloud compute --project "my-spring-mvc" ssh --zone "southamerica-east1-a" "my-server-app-spring-mvc"
+
+13. Acesse a instancia criada no passo 7 e clone o projeto
+a) Altere no FileServer.java para apontar para o arquivo my-spring-mvc-3fc1f59f9751.json de acesso ao Bucket. Se não tiver esse arquivo vá até o bucket criado no passo 1 e salve esse arquivo em um local seguro da sua instancia criada no passo 7.
+
+14. Compila o projeto e gera o .war
+mvn compile war:war
+
+15. Copia o .war para a pasta de webs do tomcat
+sudo cp appcrudmvc.war /var/lib/tomcat8/webapps/
+
+Acesse http://ip-da-instancia:8080/appcrudmvc
