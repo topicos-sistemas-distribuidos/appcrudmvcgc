@@ -1,5 +1,6 @@
 package br.ufpi.es.appcrud.modelo;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,7 +12,10 @@ import javax.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class LogAcesso {
+public class LogAcesso implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String descricao;

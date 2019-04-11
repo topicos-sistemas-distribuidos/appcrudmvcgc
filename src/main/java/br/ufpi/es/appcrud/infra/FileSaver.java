@@ -22,22 +22,17 @@ public class FileSaver {
 	@Autowired 
 	private HttpServletRequest request;
 	private Storage storage;
-	private StorageOptions storageOptions;
+	//private StorageOptions storageOptions;
 	
 	private void init() {
-		try {
-			storageOptions = StorageOptions.newBuilder()
-					.setProjectId("my-spring-mvc")
-					.setCredentials(GoogleCredentials.fromStream(new FileInputStream("/home/armandosoaressousa/tsd/appcrudmvcgc/my-spring-mvc-3fc1f59f9751.json"))).build();
-			System.out.println("Configurações do Bucket carregadas com sucesso!");
-		} catch (IOException e) {
-			System.out.println("Erro ao carregar as configurações do Bucket.");
-			e.printStackTrace();
-		}
-		storage = storageOptions.getService();
+			try {
+				storage = StorageOptions.getDefaultInstance().getService();
+				System.out.println("Configurações do Bucket carregadas com sucesso!");
+			} catch (Exception e) {
+				System.out.println("Erro ao carregar as configurações do Bucket!");
+				e.printStackTrace();
+			}
 	}
-	
-	//private static Storage storage = StorageOptions.getDefaultInstance().getService();
 	
 	public String write(String baseFolder, MultipartFile file) {
         try {
@@ -59,7 +54,7 @@ public class FileSaver {
 		System.out.println("Fazendo o upload do arquivo para o Bucket");
 		init();
 		try {
-			blobInfo = storage.create(BlobInfo.newBuilder("meu-bucket-files", file.getOriginalFilename()).build(), file.getBytes(),
+			blobInfo = storage.create(BlobInfo.newBuilder("river-formula-237300.appspot.com", file.getOriginalFilename()).build(), file.getBytes(),
 																BlobTargetOption.predefinedAcl(PredefinedAcl.PUBLIC_READ));
 		} catch (IOException e) {
 			e.printStackTrace();

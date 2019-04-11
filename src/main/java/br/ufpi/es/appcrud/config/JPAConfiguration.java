@@ -26,7 +26,7 @@ public class JPAConfiguration {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUsername("root");
         dataSource.setPassword("skyinfo");
-        dataSource.setUrl("jdbc:mysql://34.66.43.145:3306/gerenciadorusuarios");
+        dataSource.setUrl("jdbc:mysql://35.202.23.180:3306/gerenciadorusuarios");
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
 
         factoryBean.setDataSource(dataSource);
