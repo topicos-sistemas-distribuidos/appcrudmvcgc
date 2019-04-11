@@ -218,7 +218,7 @@ public class UsuarioController {
 		        return new ModelAndView("usuarios/TelaInserirUsuario");
 		    }
 			if (!imagem.isEmpty()){
-				String path = fileSaver.write("arquivos-imagem", imagem);
+				String path = fileSaver.write(imagem);
 				usuario.setImagemPath(path);				
 			}
 			usuarioDAO.inserir(usuario);
