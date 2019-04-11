@@ -28,8 +28,10 @@ public class FileSaver {
 		try {
 			storageOptions = StorageOptions.newBuilder()
 					.setProjectId("my-spring-mvc")
-					.setCredentials(GoogleCredentials.fromStream(new FileInputStream("/Users/armandosoaressousa/Desktop/my-spring-mvc-3fc1f59f9751.json"))).build();
+					.setCredentials(GoogleCredentials.fromStream(new FileInputStream("/home/armandosoaressousa/tsd/appcrudmvcgc/my-spring-mvc-3fc1f59f9751.json"))).build();
+			System.out.println("Configurações do Bucket carregadas com sucesso!");
 		} catch (IOException e) {
+			System.out.println("Erro ao carregar as configurações do Bucket.");
 			e.printStackTrace();
 		}
 		storage = storageOptions.getService();
@@ -54,7 +56,7 @@ public class FileSaver {
 		
 	public String write(MultipartFile file) {
 		BlobInfo blobInfo = null;
-		
+		System.out.println("Fazendo o upload do arquivo para o Bucket");
 		init();
 		try {
 			blobInfo = storage.create(BlobInfo.newBuilder("meu-bucket-files", file.getOriginalFilename()).build(), file.getBytes(),
